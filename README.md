@@ -10,4 +10,17 @@ PySMSClient is a comprehensive Python library designed to facilitate the sending
 - **SMS History**: Retrieve and view your SMS sending history.
 - **Status Checks**: Monitor the delivery status of your messages.
 - **Contact Management**: Manage your contact list for easier SMS operations.
-s
+
+
+## Usage
+```python
+from smsclient import SMSClient
+
+client = SMSClient("api_key")
+
+mobile = client.mobile.check("0123456789") # mobile phone
+
+sms_send = client.sms.send(to="test_mobile", text="Hello World", sender="Test")
+```
+
+### You can find the api documentation from [smscenter.gr](https://smscenter.gr/api/docs/en?ModPagespeed=off)
