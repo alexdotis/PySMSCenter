@@ -10,8 +10,8 @@ PySMSCenter is a developing Python library designed to facilitate the sending an
 - **Contact Management**: Manage your contact list for easier SMS operations.
 
 ## Planed Features
-- **Viber Management
-- **Group Management
+- **Viber Management**
+- **Group Management**
 ## Getting Started 
 ### Prerequisites 
 - Python 3.11 
