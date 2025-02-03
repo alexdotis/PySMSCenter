@@ -96,7 +96,7 @@ class ContactManager(Manager):
             nameday (date | None, optional): Nameday of contact in YYYY-MM-DD format. Defaults to None.
 
         Raises:
-            ContactException:
+            ContactExceptionError:
 
         Returns:
            ContactData: Response from the API

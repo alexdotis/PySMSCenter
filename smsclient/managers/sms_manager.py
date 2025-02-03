@@ -56,7 +56,7 @@ class SmsManager(Manager):
         return typing.cast(SMSRawData, response)
 
     def bulk(
-        self, to: typing.Sequence[str], text: str, sender: str
+        self, to: typing.Sequence[str], text: str, sender: str, **kwargs
     ) -> dict[str, typing.Any]:
         """Send an SMS to multiple recipients
         Args:
@@ -74,7 +74,7 @@ class SmsManager(Manager):
         if isinstance(to, list):
             to = ",".join(to)
 
-        params = {"to": to, "text": text, "from": sender, "type": "json"}
+        params = {"to": to, "text": text, "from": sender, "type": "json", **kwargs}
 
         response = self.call("GET", "sms/bulk", params)
         error_codes = {"102", "103", "104", "105", "106"}
