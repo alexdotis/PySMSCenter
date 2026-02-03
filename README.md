@@ -18,12 +18,25 @@ PySMSCenter is a developing Python library designed to facilitate the sending an
 
 ### Prerequisites
 
-- Python 3.11
+- Python **>3.11**
 - An API key from [smscenter](https://smscenter.gr/api/docs/en?ModPagespeed=off#how-to-start)
 
 ### Installation
 
 Currently, the library is available directly from the source. Clone or download the repository from GitHub, then install requirements using pip.
+
+### Client
+
+Client (with context manager support)
+
+```python
+from smsclient import SMSClient
+
+with SMSClient("api_key") as client:
+	client.mobile.check("phone number")
+```
+
+The client can also be used without a context manager if preferred.
 
 ### Send Single SMS
 
