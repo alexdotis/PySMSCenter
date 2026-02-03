@@ -14,7 +14,7 @@ class SmsResponseRawData(typing.TypedDict):
 class StatusManager(Manager):
     name = "status"
 
-    def __str__(self) -> str:  # type: ignore
+    def __str__(self) -> str:
         return self.__class__.__name__
 
     def get(self) -> SmsResponseRawData:

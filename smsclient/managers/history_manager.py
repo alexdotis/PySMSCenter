@@ -27,7 +27,7 @@ class SingleListHistoryRawData(typing.TypedDict):
 class HistoryManager(Manager):
     name = "history"
 
-    def __str__(self) -> str:  # type: ignore
+    def __str__(self) -> str:
         return self.__class__.__name__
 
     def group_list(self) -> None:

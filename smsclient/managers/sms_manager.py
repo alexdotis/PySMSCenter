@@ -1,10 +1,9 @@
 import typing
 
+from exceptions import SMSExceptionError
+from smsclient.utils import raise_for_errors
+
 from .manager import Manager
-
-
-class SMSExceptionError(Exception):
-    pass
 
 
 class SMSRawData(typing.TypedDict):
@@ -28,7 +27,7 @@ class SMSCancelRawData(typing.TypedDict):
 class SmsManager(Manager):
     name = "sms"
 
-    def __str__(self) -> str:  # type: ignore
+    def __str__(self) -> str:
         return self.__class__.__name__
 
     def send(self, to: str, text: str, sender: str, **kwargs) -> SMSRawData:
@@ -50,14 +49,11 @@ class SmsManager(Manager):
         response = self.call("GET", "sms/send", params)
         error_codes = {"102", "103", "104", "105", "106"}
 
-        if response.get("error") in error_codes:
-            raise SMSExceptionError(response.get("remarks"))
+        raise_for_errors(response, error_codes, SMSExceptionError)
 
         return typing.cast(SMSRawData, response)
 
-    def bulk(
-        self, to: typing.Sequence[str], text: str, sender: str, **kwargs
-    ) -> dict[str, typing.Any]:
+    def bulk(self, to: typing.Sequence[str], text: str, sender: str, **kwargs) -> dict[str, typing.Any]:
         """Send an SMS to multiple recipients
         Args:
             to (typing.Sequence[str]): multiple mobiles to send the sms to

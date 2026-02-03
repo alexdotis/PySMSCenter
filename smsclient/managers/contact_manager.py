@@ -1,11 +1,10 @@
 import typing
 from datetime import date
 
+from exceptions import ContactExceptionError
+from smsclient.utils import raise_for_errors
+
 from .manager import Manager
-
-
-class ContactExceptionError(Exception):
-    pass
 
 
 class ContactID(typing.TypedDict):
@@ -68,7 +67,7 @@ class ContactDeleteData(typing.TypedDict):
 class ContactManager(Manager):
     name = "contact"
 
-    def __str__(self) -> str:  # type: ignore
+    def __str__(self) -> str:
         return self.__class__.__name__
 
     def add(
@@ -116,8 +115,7 @@ class ContactManager(Manager):
         response = self.call("GET", "contact/add", params)
         error_codes = {"201", "202", "203", "204", "205"}
 
-        if response.get("error") in error_codes:
-            raise ContactExceptionError(response.get("remarks"))
+        raise_for_errors(response, error_codes, ContactExceptionError)
 
         return typing.cast(ContactData, response)
 
@@ -143,11 +141,8 @@ class ContactManager(Manager):
             ContactDetail: Response from the API
         """
         error_codes = {"214", "216"}
-        response = self.call(
-            "GET", "contact/get", {"contactId": contact_id, "type": "json"}
-        )
-        if response.get("error") in error_codes:
-            raise ContactExceptionError(response.get("remarks"))
+        response = self.call("GET", "contact/get", {"contactId": contact_id, "type": "json"})
+        raise_for_errors(response, error_codes, ContactExceptionError)
         return typing.cast(ContactDetail, response)
 
     def delete(self, contact_id: str) -> ContactDeleteData:
@@ -163,13 +158,10 @@ class ContactManager(Manager):
             ContactDeleteData: Response from the API
         """
 
-        response = self.call(
-            "GET", "contact/delete", {"contactId": contact_id, "type": "json"}
-        )
+        response = self.call("GET", "contact/delete", {"contactId": contact_id, "type": "json"})
         error_codes = {"214", "216"}
 
-        if response.get("error") in error_codes:
-            raise ContactExceptionError(response.get("remarks"))
+        raise_for_errors(response, error_codes, ContactExceptionError)
 
         return typing.cast(ContactDeleteData, response)
 
@@ -222,7 +214,6 @@ class ContactManager(Manager):
         response = self.call("GET", "contact/update", params)
         error_codes = {"201", "202", "203", "214", "221"}
 
-        if response.get("error") in error_codes:
-            raise ContactExceptionError(response.get("remarks"))
+        raise_for_errors(response, error_codes, ContactExceptionError)
 
         return typing.cast(ContactData, response)

@@ -1,10 +1,9 @@
 import typing
 
+from exceptions import MobileExceptionError
+from smsclient.utils import raise_for_errors
+
 from .manager import Manager
-
-
-class MobileExceptionError(Exception):
-    pass
 
 
 class MobileData(typing.TypedDict):
@@ -30,7 +29,7 @@ class MobileRawData(typing.TypedDict):
 class MobileManager(Manager):
     name = "mobile"
 
-    def __str__(self) -> str:  # type: ignore
+    def __str__(self) -> str:
         return self.__class__.__name__
 
     def check(self, mobile: str) -> MobileRawData:
@@ -48,6 +47,6 @@ class MobileManager(Manager):
         error_codes = {"201", "205"}
         params = {"mobile": mobile}
         response = self.call("GET", "mobile/check", params)
-        if response.get("error") in error_codes:
-            raise MobileExceptionError(response.get("remarks"))
+        raise_for_errors(response, error_codes, MobileExceptionError)
+
         return typing.cast(MobileRawData, response)

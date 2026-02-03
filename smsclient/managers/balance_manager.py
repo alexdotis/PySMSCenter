@@ -13,7 +13,7 @@ class BalanceRawData(typing.TypedDict):
 class BalanceManager(Manager):
     name = "balance"
 
-    def __str__(self) -> str:  # type: ignore
+    def __str__(self) -> str:
         return self.__class__.__name__
 
     def check(self) -> BalanceRawData:
