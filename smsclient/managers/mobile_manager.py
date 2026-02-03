@@ -1,6 +1,6 @@
 import typing
 
-from exceptions import MobileExceptionError
+from smsclient.exceptions import MobileExceptionError
 from smsclient.utils import raise_for_errors
 
 from .manager import Manager

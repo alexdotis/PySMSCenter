@@ -5,8 +5,7 @@ from urllib.parse import urljoin
 from requests import Session
 from requests.adapters import HTTPAdapter
 
-from exceptions import CrendetialError
-
+from .exceptions import CrendetialError
 from .managers.balance_manager import BalanceManager
 from .managers.contact_manager import ContactManager
 from .managers.history_manager import HistoryManager

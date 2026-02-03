@@ -90,4 +90,4 @@ client.contact.delete(contact_id="123456")
 
 ## Contributing
 
-We welcome contributions to help grow and improve this library. Please refer to our contributing guidelines for more information on how to submit issues, fixes, or enhancements..
+We welcome contributions to help grow and improve this library. Please refer to our contributing guidelines for more information on how to submit issues, fixes, or enhancements.

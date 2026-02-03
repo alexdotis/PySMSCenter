@@ -1,7 +1,7 @@
 import typing
 from datetime import date
 
-from exceptions import ContactExceptionError
+from smsclient.exceptions import ContactExceptionError
 from smsclient.utils import raise_for_errors
 
 from .manager import Manager
