@@ -6,6 +6,8 @@ if TYPE_CHECKING:
 
 
 class Manager:
+    name: typing.ClassVar[str]
+
     def __init__(self, client: "SMSClient") -> None:
         self.client = client
 

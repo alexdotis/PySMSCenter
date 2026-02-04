@@ -5,19 +5,28 @@ from urllib.parse import urljoin
 from requests import Session
 from requests.adapters import HTTPAdapter
 
+from smsclient.managers.balance_manager import BalanceManager
+from smsclient.managers.contact_manager import ContactManager
+from smsclient.managers.history_manager import HistoryManager
+from smsclient.managers.manager import Manager
+from smsclient.managers.mobile_manager import MobileManager
+from smsclient.managers.sms_manager import SmsManager
+from smsclient.managers.status_manager import StatusManager
+
 from .exceptions import CrendetialError
-from .managers.balance_manager import BalanceManager
-from .managers.contact_manager import ContactManager
-from .managers.history_manager import HistoryManager
-from .managers.mobile_manager import MobileManager
-from .managers.sms_manager import SmsManager
-from .managers.status_manager import StatusManager
-from .utils import raise_for_errors
 
 
 class SMSClient:
     BASE_URL = "https://smscenter.gr/api/"
-    managers: typing.ClassVar[list] = [
+
+    mobile: "MobileManager"
+    sms: "SmsManager"
+    balance: "BalanceManager"
+    history: "HistoryManager"
+    status: "StatusManager"
+    contact: "ContactManager"
+
+    managers: typing.ClassVar[list[type[Manager]]] = [
         MobileManager,
         SmsManager,
         BalanceManager,
@@ -85,5 +94,11 @@ class SMSClient:
         response = self.session.request(method, url, params=params)
         response.raise_for_status()
         response_json = response.json()
-        raise_for_errors(response_json, {"101"}, CrendetialError)
+
+        if str(response_json.get("status")) == "0" and str(response_json.get("error")) == "101":
+            raise CrendetialError(
+                response_json.get("remarks"),
+                code=str(response_json.get("error")),
+                response=response_json,
+            )
         return response_json

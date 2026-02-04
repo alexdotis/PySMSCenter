@@ -111,12 +111,10 @@ max-branches = 20
 max-returns = 20
 max-statements = 250
 
+
+
 [tool.ruff.lint.per-file-ignores]
-"tests/**.py" = [
-  "ANN",  # annotations
-  "D",    # docstrings
-  "S101", # Use of assert
-]
+"**/tests/**/*.py" = ["ANN", "D", "S101"]
 
 [tool.ruff.format]
 line-ending = "lf"

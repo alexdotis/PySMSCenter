@@ -18,12 +18,12 @@ class MobileData(typing.TypedDict):
     number: str
 
 
-class MobileRawData(typing.TypedDict):
+class MobileRawData(typing.TypedDict, total=False):
+    status: typing.Literal["0", "1"]
     error: str
-    mobile: MobileData
     remarks: str
-    status: str
     total: int
+    mobile: MobileData
 
 
 class MobileManager(Manager):
@@ -44,9 +44,8 @@ class MobileManager(Manager):
         Returns:
             MobileRawData: Response from the API
         """
-        error_codes = {"201", "205"}
         params = {"mobile": mobile}
         response = self.call("GET", "mobile/check", params)
-        raise_for_errors(response, error_codes, MobileExceptionError)
+        raise_for_errors(response, MobileExceptionError)
 
         return typing.cast(MobileRawData, response)

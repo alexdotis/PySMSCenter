@@ -3,11 +3,14 @@ import typing
 from .manager import Manager
 
 
-class BalanceRawData(typing.TypedDict):
-    status: str
-    balance: str
-    remarks: str
+class BalanceBaseResponse(typing.TypedDict):
+    status: typing.Literal["0", "1"]
     error: str
+    remarks: str
+
+
+class BalanceRawData(BalanceBaseResponse, total=False):
+    balance: str
 
 
 class BalanceManager(Manager):
