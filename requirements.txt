@@ -13,7 +13,6 @@ pyflakes==3.2.0
 Pygments==2.19.2
 pytest==9.0.2
 pytest-mock==3.15.1
-requests==2.32.3
+requests==2.32.4
 ruff==0.9.4
--e git+https://github.com/alexdotis/PySMSCenter.git@812be05cec634829f49e82f71f111600a542b68b#egg=smsclient
 urllib3==2.6.3
