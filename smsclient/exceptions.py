@@ -15,7 +15,7 @@ class SMSClientError(Exception):
         return f"[{self.code}] {msg}" if self.code and msg else (f"[{self.code}]" if self.code else msg)
 
 
-class CrendetialError(SMSClientError):
+class CredentialError(SMSClientError):
     pass
 
 

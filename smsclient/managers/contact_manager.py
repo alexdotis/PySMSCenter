@@ -6,6 +6,8 @@ from smsclient.utils import parse_date, raise_for_errors
 
 from .manager import Manager
 
+DateLike: typing.TypeAlias = str | date
+
 
 class ContactID(typing.TypedDict):
     contactId: str
@@ -78,11 +80,11 @@ class ContactManager(Manager):
         full_name: str = "",
         vname: str = "",
         vusername: str = "",
-        birthday: str | date | None = None,
-        nameday: str | date | None = None,
+        birthday: DateLike | None = None,
+        nameday: DateLike | None = None,
         **kwargs: typing.Any,
     ) -> ContactData:
-        """Add a contact
+        """Add a contact.
 
         Args:
             mobile (str): Mobile number of the contact
@@ -91,14 +93,15 @@ class ContactManager(Manager):
             full_name (str | None, optional): Fullname of contact. Defaults to None.
             vname (str | None, optional): First name in vocative. Useful for personalised messages. Defaults to None.
             vusername (str | None, optional): Last name in vocative. Useful for personalised messages. Defaults to None
-            birthday (date | None, optional): Birthday of contact in YYYY-MM-DD format. Defaults to None.
-            nameday (date | None, optional): Nameday of contact in YYYY-MM-DD format. Defaults to None.
+            birthday (DateLike | None, optional): Birthday of contact in YYYY-MM-DD format. Defaults to None.
+            nameday (DateLike | None, optional): Nameday of contact in YYYY-MM-DD format. Defaults to None.
+            **kwargs: Additional API parameters to include.
 
         Raises:
-            ContactExceptionError:
+            ContactExceptionError: If the API response indicates an error.
 
         Returns:
-           ContactData: Response from the API
+           ContactData: Response from the API.
         """
         params = {
             "mobile": mobile,
@@ -119,41 +122,44 @@ class ContactManager(Manager):
         return typing.cast(ContactData, response)
 
     def list(self) -> ContactListData:
-        """Get the list of contacts
+        """Get the list of contacts.
 
         Raises:
-            ContactExceptionError: If error code is in error_codes
+            ContactExceptionError: If the API response indicates an error.
 
         Returns:
-            ContactListData: Response from the API
+            ContactListData: Response from the API.
         """
         response = self.call("GET", "contact/list", {"type": "json"})
         return typing.cast(ContactListData, response)
 
     def get(self, contact_id: str) -> ContactDetail:
-        """Get the list of contacts
+        """Get a contact's details.
+
+        Args:
+            contact_id: Contact ID to retrieve.
 
         Raises:
-            ContactExceptionError: If error code is in error_codes
+            ContactExceptionError: If the API response indicates an error.
 
         Returns:
-            ContactDetail: Response from the API
+            ContactDetail: Response from the API.
         """
         response = self.call("GET", "contact/get", {"contactId": contact_id, "type": "json"})
         raise_for_errors(response, ContactExceptionError)
         return typing.cast(ContactDetail, response)
 
     def delete(self, contact_id: str) -> ContactDeleteData:
-        """Delete a contact
+        """Delete a contact.
 
         Args:
-            mobile (str): Mobile number of the contact to delete
+            contact_id (str): Contact ID of the contact to delete.
 
         Raises:
-            ContactExceptionError: If error code is in error_codes
+            ContactExceptionError: If the API response indicates an error.
 
         Returns:
-            ContactDeleteData: Response from the API
+            ContactDeleteData: Response from the API.
         """
 
         response = self.call("GET", "contact/delete", {"contactId": contact_id, "type": "json"})
@@ -171,11 +177,11 @@ class ContactManager(Manager):
         full_name: str | None = None,
         vname: str | None = None,
         vusername: str | None = None,
-        birthday: str | date | None = None,
-        nameday: str | date | None = None,
+        birthday: DateLike | None = None,
+        nameday: DateLike | None = None,
         **kwargs: typing.Any,
     ) -> ContactData:
-        """_summary_
+        """Update a contact.
 
         Args:
             contact_id (str): Contact ID to update
@@ -185,14 +191,15 @@ class ContactManager(Manager):
             full_name (str | None, optional): Fullname of contact. Defaults to None.
             vname (str | None, optional): First name in vocative. Useful for personalised messages. Defaults to None.
             vusername (str | None, optional): Last name in vocative. Useful for personalised messages. Defaults to None
-            birthday (date | None, optional): Birthday of contact in YYYY-MM-DD format. Defaults to None.
-            nameday (date | None, optional): Nameday of contact in YYYY-MM-DD format. Defaults to None.
+            birthday (DateLike | None, optional): Birthday of contact in YYYY-MM-DD format. Defaults to None.
+            nameday (DateLike | None, optional): Nameday of contact in YYYY-MM-DD format. Defaults to None.
+            **kwargs: Additional API parameters to include.
 
         Raises:
-            ContactExceptionError: _description_
+            ContactExceptionError: If the API response indicates an error.
 
         Returns:
-            ContactData: _description_
+            ContactData: Response from the API.
         """
 
         params = {
@@ -216,7 +223,17 @@ class ContactManager(Manager):
 
     @staticmethod
     def _date_to_api(value: date | str | None) -> str | None:
+        """Convert a date-like value to the API's date string.
 
+        Args:
+            value: Date or ISO-like string.
+
+        Returns:
+            ISO-8601 date string, or None if value is None.
+
+        Raises:
+            ContactExceptionError: If the date string cannot be parsed.
+        """
         if value is None:
             return None
 

@@ -13,7 +13,7 @@ from smsclient.managers.mobile_manager import MobileManager
 from smsclient.managers.sms_manager import SmsManager
 from smsclient.managers.status_manager import StatusManager
 
-from .exceptions import CrendetialError
+from .exceptions import CredentialError
 
 
 class SMSClient:
@@ -38,7 +38,7 @@ class SMSClient:
     def __init__(self, api_key: str, max_retries: int = 0) -> None:
         self.api_key = api_key
         if not api_key:
-            raise CrendetialError("API key is required")
+            raise CredentialError("API key is required")
         self.max_retries = max_retries
         self._session: Session | None = None
         self._closed: bool = False
@@ -85,7 +85,6 @@ class SMSClient:
             setattr(self, manager.name, manager(self))
 
     def fetch_data(self, method: str, endpoint: str, params: dict[str, typing.Any]) -> dict[str, typing.Any]:
-
         if params.get("api_key") is None:
             params.update({"key": self.api_key})
 
@@ -96,7 +95,7 @@ class SMSClient:
         response_json = response.json()
 
         if str(response_json.get("status")) == "0" and str(response_json.get("error")) == "101":
-            raise CrendetialError(
+            raise CredentialError(
                 response_json.get("remarks"),
                 code=str(response_json.get("error")),
                 response=response_json,

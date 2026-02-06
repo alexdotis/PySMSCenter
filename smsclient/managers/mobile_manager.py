@@ -33,16 +33,16 @@ class MobileManager(Manager):
         return self.__class__.__name__
 
     def check(self, mobile: str) -> MobileRawData:
-        """Check the mobile number
+        """Check a mobile number.
 
         Args:
             mobile (str): Mobile number to check
 
         Raises:
-            MobileExceptionError: If error code is in error_codes
+            MobileExceptionError: If the API response indicates an error.
 
         Returns:
-            MobileRawData: Response from the API
+            MobileRawData: Response from the API.
         """
         params = {"mobile": mobile}
         response = self.call("GET", "mobile/check", params)

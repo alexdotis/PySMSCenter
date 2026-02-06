@@ -16,8 +16,8 @@ class SmS(typing.TypedDict):
     ttd: str
 
 
-class SingleListHistoryRawData(typing.TypedDict):
-    status: str
+class SingleListHistoryRawData(typing.TypedDict, total=False):
+    status: typing.Literal["0", "1"]
     remarks: str
     error: str
     total: str
@@ -31,10 +31,15 @@ class HistoryManager(Manager):
         return self.__class__.__name__
 
     def group_list(self) -> None:
-        # TODO implement the group list
-        raise NotImplementedError
+        """Get grouped history list (not implemented)."""
+        raise NotImplementedError("Group list endpoint is not implemented yet")
 
     def single_list(self) -> SingleListHistoryRawData:
+        """Get the single (non-grouped) SMS history list.
+
+        Returns:
+            SingleListHistoryRawData: Response from the API.
+        """
         response = self.call("GET", "history/single/list", {"type": "json"})
 
         return typing.cast(SingleListHistoryRawData, response)

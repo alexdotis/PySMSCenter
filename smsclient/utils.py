@@ -26,3 +26,17 @@ def parse_date(value: str) -> datetime.date:
         return datetime.date.fromisoformat(value)
     except ValueError as exc:
         raise ValueError(f"Invalid date format: {value}. Expected YYYY-MM-DD") from exc
+
+
+def bool2str(value: bool | None) -> str | None:
+    if value is None:
+        return None
+    return "true" if value else "false"
+
+
+def ts2epoch(value: int | datetime.datetime) -> int:
+    if isinstance(value, int):
+        return value
+    if value.tzinfo is None:
+        value = value.replace(tzinfo=datetime.UTC)
+    return int(value.timestamp())

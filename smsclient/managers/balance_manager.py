@@ -20,7 +20,11 @@ class BalanceManager(Manager):
         return self.__class__.__name__
 
     def check(self) -> BalanceRawData:
-        """Check the balance of the account"""
+        """Check the account balance.
+
+        Returns:
+            BalanceRawData: Response from the API.
+        """
         response = self.call("GET", "me/balance", {"type": "json"})
 
         return typing.cast(BalanceRawData, response)
