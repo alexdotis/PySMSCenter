@@ -1,29 +1,10 @@
-import typing
+from typing import cast
 
 from smsclient.exceptions import MobileExceptionError
+from smsclient.types import MobileRawData
 from smsclient.utils import raise_for_errors
 
 from .manager import Manager
-
-
-class MobileData(typing.TypedDict):
-    cost: int
-    country: str
-    countryCode: int
-    gsmCode: str
-    mcc: str
-    mnc: str
-    msisdn: str
-    national: str
-    number: str
-
-
-class MobileRawData(typing.TypedDict, total=False):
-    status: typing.Literal["0", "1"]
-    error: str
-    remarks: str
-    total: int
-    mobile: MobileData
 
 
 class MobileManager(Manager):
@@ -48,4 +29,4 @@ class MobileManager(Manager):
         response = self.call("GET", "mobile/check", params)
         raise_for_errors(response, MobileExceptionError)
 
-        return typing.cast(MobileRawData, response)
+        return cast(MobileRawData, response)

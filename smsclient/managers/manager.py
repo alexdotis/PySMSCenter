@@ -1,12 +1,12 @@
-import typing
-from typing import TYPE_CHECKING
+from collections.abc import Mapping
+from typing import Any, ClassVar, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from smsclient.main import SMSClient
 
 
 class Manager:
-    name: typing.ClassVar[str]
+    name: ClassVar[str]
 
     def __init__(self, client: "SMSClient") -> None:
         self.client = client
@@ -15,6 +15,6 @@ class Manager:
         self,
         method: str,
         endpoint: str,
-        params: typing.Mapping[str, typing.Any] | None = None,
-    ) -> dict[str, typing.Any]:
+        params: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
         return self.client.fetch_data(method, endpoint, params)

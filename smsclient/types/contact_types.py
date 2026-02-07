@@ -1,0 +1,48 @@
+from datetime import date
+from typing import TypeAlias, TypedDict
+
+from smsclient.types.base import BaseResponse
+
+DateLike: TypeAlias = str | date
+
+
+class ContactID(TypedDict):
+    contactId: str
+
+
+class ContactData(BaseResponse, total=False):
+    contact: ContactID
+
+
+class Contacts(TypedDict):
+    contactId: str
+    mobile: str
+    smscost: str
+    name: str
+    surname: str
+    vname: str
+    birthday: str
+    nameday: str
+    custom1: str
+    custom2: str
+
+
+class ContactListData(BaseResponse, total=False):
+    total: str
+    contacts: list[Contacts]
+
+
+class Contact(TypedDict):
+    contactId: str
+    mobile: str
+    smscost: str
+    name: str
+    surname: str
+    vname: str
+    birthday: str
+    nameday: str
+
+
+class ContactDetail(BaseResponse, total=False):
+    total: str
+    contact: Contact

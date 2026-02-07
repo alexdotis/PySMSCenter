@@ -1,69 +1,11 @@
-import typing
 from datetime import date
+from typing import Any, cast
 
 from smsclient.exceptions import ContactExceptionError
+from smsclient.types import BaseResponse, ContactData, ContactDetail, ContactListData, DateLike
 from smsclient.utils import parse_date, raise_for_errors
 
 from .manager import Manager
-
-DateLike: typing.TypeAlias = str | date
-
-
-class ContactID(typing.TypedDict):
-    contactId: str
-
-
-class ContactData(typing.TypedDict, total=False):
-    status: typing.Literal["0", "1"]
-    remarks: str
-    error: str
-    contact: ContactID
-
-
-class Contacts(typing.TypedDict):
-    contactId: str
-    mobile: str
-    smscost: str
-    name: str
-    surname: str
-    vname: str
-    birthday: str
-    nameday: str
-    custom1: str
-    custom2: str
-
-
-class ContactListData(typing.TypedDict, total=False):
-    status: typing.Literal["0", "1"]
-    remarks: str
-    error: str
-    total: str
-    contacts: list[Contacts]
-
-
-class Contact(typing.TypedDict):
-    contactId: str
-    mobile: str
-    smscost: str
-    name: str
-    surname: str
-    vname: str
-    birthday: str
-    nameday: str
-
-
-class ContactDetail(typing.TypedDict, total=False):
-    status: typing.Literal["0", "1"]
-    remarks: str
-    error: str
-    total: str
-    contact: Contact
-
-
-class ContactDeleteData(typing.TypedDict, total=False):
-    status: typing.Literal["0", "1"]
-    remarks: str
-    error: str
 
 
 class ContactManager(Manager):
@@ -82,7 +24,7 @@ class ContactManager(Manager):
         vusername: str = "",
         birthday: DateLike | None = None,
         nameday: DateLike | None = None,
-        **kwargs: typing.Any,
+        **kwargs: Any,
     ) -> ContactData:
         """Add a contact.
 
@@ -119,7 +61,7 @@ class ContactManager(Manager):
 
         raise_for_errors(response, ContactExceptionError)
 
-        return typing.cast(ContactData, response)
+        return cast(ContactData, response)
 
     def list(self) -> ContactListData:
         """Get the list of contacts.
@@ -131,7 +73,7 @@ class ContactManager(Manager):
             ContactListData: Response from the API.
         """
         response = self.call("GET", "contact/list")
-        return typing.cast(ContactListData, response)
+        return cast(ContactListData, response)
 
     def get(self, contact_id: str) -> ContactDetail:
         """Get a contact's details.
@@ -147,9 +89,9 @@ class ContactManager(Manager):
         """
         response = self.call("GET", "contact/get", {"contactId": contact_id})
         raise_for_errors(response, ContactExceptionError)
-        return typing.cast(ContactDetail, response)
+        return cast(ContactDetail, response)
 
-    def delete(self, contact_id: str) -> ContactDeleteData:
+    def delete(self, contact_id: str) -> BaseResponse:
         """Delete a contact.
 
         Args:
@@ -159,14 +101,14 @@ class ContactManager(Manager):
             ContactExceptionError: If the API response indicates an error.
 
         Returns:
-            ContactDeleteData: Response from the API.
+            BaseResponse: Response from the API.
         """
 
         response = self.call("GET", "contact/delete", {"contactId": contact_id})
 
         raise_for_errors(response, ContactExceptionError)
 
-        return typing.cast(ContactDeleteData, response)
+        return cast(BaseResponse, response)
 
     def update(
         self,
@@ -179,7 +121,7 @@ class ContactManager(Manager):
         vusername: str | None = None,
         birthday: DateLike | None = None,
         nameday: DateLike | None = None,
-        **kwargs: typing.Any,
+        **kwargs: Any,
     ) -> ContactData:
         """Update a contact.
 
@@ -219,7 +161,7 @@ class ContactManager(Manager):
 
         raise_for_errors(response, ContactExceptionError)
 
-        return typing.cast(ContactData, response)
+        return cast(ContactData, response)
 
     @staticmethod
     def _date_to_api(value: date | str | None) -> str | None:

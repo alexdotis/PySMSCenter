@@ -1,5 +1,6 @@
 import types
-import typing
+from collections.abc import Mapping
+from typing import Any, ClassVar
 from urllib.parse import urljoin
 
 from requests import Session
@@ -29,7 +30,7 @@ class SMSClient:
     contact: "ContactManager"
     group: "GroupManager"
 
-    managers: typing.ClassVar[list[type[Manager]]] = [
+    managers: ClassVar[list[type[Manager]]] = [
         MobileManager,
         SmsManager,
         BalanceManager,
@@ -92,8 +93,8 @@ class SMSClient:
         self,
         method: str,
         endpoint: str,
-        params: typing.Mapping[str, typing.Any] | None = None,
-    ) -> dict[str, typing.Any]:
+        params: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
         params_dict = dict(params) if params is not None else {}
         params_dict.setdefault("type", self.DEFAULT_TYPE)
         params_dict.update({"key": self.api_key})

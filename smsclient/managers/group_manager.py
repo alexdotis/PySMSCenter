@@ -1,81 +1,10 @@
-import typing
+from typing import cast, overload
 
 from smsclient.exceptions import GroupExceptionError
+from smsclient.types import BaseResponse, GroupAddContactData, GroupData, GroupGetData, GroupListData
 from smsclient.utils import raise_for_errors
 
 from .manager import Manager
-
-
-class Group(typing.TypedDict):
-    groupId: str
-
-
-class GroupList(typing.TypedDict):
-    groupId: str
-    name: str
-
-
-class GroupData(typing.TypedDict, total=False):
-    status: typing.Literal["0", "1"]
-    remarks: str
-    error: str
-    group: Group
-
-
-class GroupListData(typing.TypedDict, total=False):
-    status: typing.Literal["0", "1"]
-    remarks: str
-    error: str
-    total: str
-    groups: list[GroupList]
-
-
-class GroupContact(typing.TypedDict, total=False):
-    contactId: str
-    mobile: str
-    smscost: str
-    name: str
-    surname: str
-    vname: str
-    birthday: str
-    nameday: str
-    custom1: str
-    custom2: str
-
-
-class GroupGetGroup(typing.TypedDict, total=False):
-    name: str
-    total: str
-    contacts: list[GroupContact]
-
-
-class GroupGetData(typing.TypedDict, total=False):
-    status: typing.Literal["0", "1"]
-    remarks: str
-    error: str
-    total: str
-    group: GroupGetGroup
-
-
-class GroupContactLink(typing.TypedDict):
-    contactGroupId: str
-
-
-class GroupAddContactGroup(typing.TypedDict):
-    contact: GroupContactLink
-
-
-class GroupAddContactData(typing.TypedDict, total=False):
-    status: typing.Literal["0", "1"]
-    remarks: str
-    error: str
-    group: GroupAddContactGroup
-
-
-class GroupDeleteContactData(typing.TypedDict, total=False):
-    status: typing.Literal["0", "1"]
-    remarks: str
-    error: str
 
 
 class GroupManager(Manager):
@@ -94,7 +23,7 @@ class GroupManager(Manager):
 
         response = self.call("GET", "group/add", {"name": name})
         raise_for_errors(response, GroupExceptionError)
-        return typing.cast(GroupData, response)
+        return cast(GroupData, response)
 
     def delete(self, group_id: str) -> GroupData:
         """
@@ -107,7 +36,7 @@ class GroupManager(Manager):
         response = self.call("GET", "group/delete", {"groupId": group_id})
         raise_for_errors(response, GroupExceptionError)
 
-        return typing.cast(GroupData, response)
+        return cast(GroupData, response)
 
     def list(self) -> GroupListData:
         """
@@ -119,7 +48,7 @@ class GroupManager(Manager):
 
         response = self.call("GET", "group/list")
 
-        return typing.cast(GroupListData, response)
+        return cast(GroupListData, response)
 
     def get(self, group_id: str) -> GroupGetData:
         """
@@ -139,7 +68,7 @@ class GroupManager(Manager):
 
         raise_for_errors(response, GroupExceptionError)
 
-        return typing.cast(GroupGetData, response)
+        return cast(GroupGetData, response)
 
     def add_contact(self, group_id: str, contact_id: str) -> GroupAddContactData:
         """
@@ -164,13 +93,13 @@ class GroupManager(Manager):
 
         raise_for_errors(response, GroupExceptionError)
 
-        return typing.cast(GroupAddContactData, response)
+        return cast(GroupAddContactData, response)
 
-    @typing.overload
-    def delete_contact(self, *, group_id: str, contact_id: str) -> GroupDeleteContactData: ...
+    @overload
+    def delete_contact(self, *, group_id: str, contact_id: str) -> BaseResponse: ...
 
-    @typing.overload
-    def delete_contact(self, *, contact_group_id: str) -> GroupDeleteContactData: ...
+    @overload
+    def delete_contact(self, *, contact_group_id: str) -> BaseResponse: ...
 
     def delete_contact(
         self,
@@ -178,7 +107,7 @@ class GroupManager(Manager):
         group_id: str | None = None,
         contact_id: str | None = None,
         contact_group_id: str | None = None,
-    ) -> GroupDeleteContactData:
+    ) -> BaseResponse:
         """
         Delete a contact from a group.
 
@@ -193,7 +122,7 @@ class GroupManager(Manager):
             GroupExceptionError: If the API response indicates an error.
             ValueError: If neither contact_group_id nor both group_id and contact_id are provided.
         Returns:
-            GroupDeleteContactData: Response from the API.
+            BaseResponse: Response from the API.
         """
         error_message = "Either contact_group_id or both group_id and contact_id must be provided."
 
@@ -219,9 +148,9 @@ class GroupManager(Manager):
 
         raise_for_errors(response, GroupExceptionError)
 
-        return typing.cast(GroupDeleteContactData, response)
+        return cast(BaseResponse, response)
 
-    def delete_all_contacts(self, group_id: str) -> GroupDeleteContactData:
+    def delete_all_contacts(self, group_id: str) -> BaseResponse:
         """
         Delete all contacts from a group.
 
@@ -230,10 +159,10 @@ class GroupManager(Manager):
         Raises:
             GroupExceptionError: If the API response indicates an error.
         Returns:
-            GroupDeleteContactData: Response from the API.
+            BaseResponse: Response from the API.
         """
         response = self.call("GET", "group/deleteAllContacts", {"groupId": group_id})
 
         raise_for_errors(response, GroupExceptionError)
 
-        return typing.cast(GroupDeleteContactData, response)
+        return cast(BaseResponse, response)

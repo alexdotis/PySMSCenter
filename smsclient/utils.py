@@ -1,12 +1,12 @@
 import datetime
 import re
-import typing
+from typing import Any
 
 from smsclient.exceptions import SMSClientError
 
 
 def raise_for_errors(
-    response: dict[str, typing.Any],
+    response: dict[str, Any],
     exc: type[SMSClientError],
 ) -> None:
     if response.get("status") == "0":

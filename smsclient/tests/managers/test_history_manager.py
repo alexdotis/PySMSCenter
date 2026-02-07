@@ -78,3 +78,52 @@ class TestHistoryManager:
             "history/single/list",
         )
         assert response == fake_response
+
+    def test_history_group_list(self, client: SMSClient, mocker: Any) -> None:
+        fake_response = {
+            "0": {
+                "groupId": "123",
+                "sender": "TestSender",
+                "flash": "false",
+                "unicode": "false",
+                "timestamp": "2024-01-01 12:00:00",
+                "text": "Test message",
+                "total": 2,
+                "cost": 2,
+                "sms": [
+                    {
+                        "smsId": "123",
+                        "contactId": "10001",
+                        "to": "306912345678",
+                        "status": "d",
+                        "cost": "1",
+                        "ttd": "3",
+                    },
+                    {
+                        "smsId": "124",
+                        "contactId": "10002",
+                        "to": "306912345679",
+                        "status": "d",
+                        "cost": "1",
+                        "ttd": "5",
+                    },
+                ],
+            },
+            "status": "1",
+            "remarks": "Success",
+            "error": "0",
+            "total": "1",
+        }
+
+        call_mock = mocker.patch.object(
+            client.history,
+            "call",
+            return_value=fake_response,
+        )
+
+        response = client.history.group_list()
+        call_mock.assert_called_once_with(
+            "GET",
+            "history/group/list",
+        )
+        assert response == fake_response

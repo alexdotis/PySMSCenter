@@ -1,16 +1,8 @@
-import typing
+from typing import cast
+
+from smsclient.types import BalanceRawData
 
 from .manager import Manager
-
-
-class BalanceBaseResponse(typing.TypedDict):
-    status: typing.Literal["0", "1"]
-    error: str
-    remarks: str
-
-
-class BalanceRawData(BalanceBaseResponse, total=False):
-    balance: str
 
 
 class BalanceManager(Manager):
@@ -27,4 +19,4 @@ class BalanceManager(Manager):
         """
         response = self.call("GET", "me/balance")
 
-        return typing.cast(BalanceRawData, response)
+        return cast(BalanceRawData, response)

@@ -1,30 +1,11 @@
-import datetime
-import typing
+from collections.abc import Sequence
+from typing import cast
 
 from smsclient.exceptions import SMSExceptionError
+from smsclient.types import SMSBulkRawData, SMSCancelRawData, SMSRawData, Timestamp
 from smsclient.utils import bool2str, raise_for_errors, ts2epoch
 
 from .manager import Manager
-
-Timestamp: typing.TypeAlias = int | datetime.datetime
-
-
-class SMSRawData(typing.TypedDict):
-    status: str
-    id: str
-    cost: str
-    balance: str
-    mcc: str
-    mnc: str
-    remarks: str
-    error: str
-
-
-class SMSCancelRawData(typing.TypedDict, total=False):
-    smsId: str
-    status: typing.Literal["0", "1"]
-    remarks: str
-    error: str
 
 
 class SmsManager(Manager):
@@ -75,21 +56,21 @@ class SmsManager(Manager):
 
         raise_for_errors(response, SMSExceptionError)
 
-        return typing.cast(SMSRawData, response)
+        return cast(SMSRawData, response)
 
     def bulk(
         self,
-        to: typing.Sequence[str] | str,
+        to: Sequence[str] | str,
         text: str,
         sender: str,
         ucs: bool | None = None,
         flash: bool | None = None,
         timestamp: Timestamp | None = None,
-    ) -> dict[str, typing.Any]:
+    ) -> SMSBulkRawData:
         """Send an SMS to multiple recipients.
 
         Args:
-            to (typing.Sequence[str] | str): multiple mobiles to send the sms to
+            to (Sequence[str] | str): multiple mobiles to send the sms to
             text (str): Text of the sms to send
             sender (str): Sender of the sms
             ucs (bool, optional): Whether the sms is unicode. Defaults to None.
@@ -100,7 +81,7 @@ class SmsManager(Manager):
             SMSExceptionError: If the API response indicates an error.
 
         Returns:
-            dict[str, typing.Any]: Response from the API.
+            SMSBulkRawData: Response from the API.
         """
 
         if isinstance(to, list | tuple):
@@ -119,7 +100,7 @@ class SmsManager(Manager):
         response = self.call("GET", "sms/bulk", params)
         raise_for_errors(response, SMSExceptionError)
 
-        return response
+        return cast(SMSBulkRawData, response)
 
     def cancel(self, sms_id: str) -> SMSCancelRawData:
         """Cancel a scheduled SMS.
@@ -140,4 +121,4 @@ class SmsManager(Manager):
         params = {"smsId": sms_id}
         response = self.call("GET", "sms/cancel", params)
         raise_for_errors(response, SMSExceptionError)
-        return typing.cast(SMSCancelRawData, response)
+        return cast(SMSCancelRawData, response)
