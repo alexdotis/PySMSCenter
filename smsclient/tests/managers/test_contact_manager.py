@@ -125,7 +125,6 @@ class TestContactManager:
         call_mock.assert_called_once_with(
             "GET",
             "contact/list",
-            {"type": "json"},
         )
 
         assert response == fake_response
@@ -148,7 +147,7 @@ class TestContactManager:
         call_mock.assert_called_once_with(
             "GET",
             "contact/get",
-            {"contactId": "123", "type": "json"},
+            {"contactId": "123"},
         )
         assert response == fake_response
 
@@ -299,7 +298,7 @@ class TestContactManager:
         call_mock.assert_called_once_with(
             "GET",
             "contact/delete",
-            {"contactId": "123", "type": "json"},
+            {"contactId": "123"},
         )
 
         assert response == fake_response

@@ -23,7 +23,7 @@ class StatusManager(Manager):
         Returns:
             SmsResponseRawData: Response from the API.
         """
-        response = self.call("GET", "status/get", {"type": "json"})
+        response = self.call("GET", "status/get")
         return typing.cast(SmsResponseRawData, response)
 
     def sms(self, sms_id: str) -> SmsResponseRawData:
@@ -35,5 +35,5 @@ class StatusManager(Manager):
         Returns:
             SmsResponseRawData: Response from the API.
         """
-        response = self.call("GET", "status/sms", {"smsId": sms_id, "type": "json"})
+        response = self.call("GET", "status/sms", {"smsId": sms_id})
         return typing.cast(SmsResponseRawData, response)

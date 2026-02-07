@@ -130,7 +130,7 @@ class ContactManager(Manager):
         Returns:
             ContactListData: Response from the API.
         """
-        response = self.call("GET", "contact/list", {"type": "json"})
+        response = self.call("GET", "contact/list")
         return typing.cast(ContactListData, response)
 
     def get(self, contact_id: str) -> ContactDetail:
@@ -145,7 +145,7 @@ class ContactManager(Manager):
         Returns:
             ContactDetail: Response from the API.
         """
-        response = self.call("GET", "contact/get", {"contactId": contact_id, "type": "json"})
+        response = self.call("GET", "contact/get", {"contactId": contact_id})
         raise_for_errors(response, ContactExceptionError)
         return typing.cast(ContactDetail, response)
 
@@ -162,7 +162,7 @@ class ContactManager(Manager):
             ContactDeleteData: Response from the API.
         """
 
-        response = self.call("GET", "contact/delete", {"contactId": contact_id, "type": "json"})
+        response = self.call("GET", "contact/delete", {"contactId": contact_id})
 
         raise_for_errors(response, ContactExceptionError)
 

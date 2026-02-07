@@ -25,6 +25,6 @@ class BalanceManager(Manager):
         Returns:
             BalanceRawData: Response from the API.
         """
-        response = self.call("GET", "me/balance", {"type": "json"})
+        response = self.call("GET", "me/balance")
 
         return typing.cast(BalanceRawData, response)

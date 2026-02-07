@@ -17,7 +17,6 @@ class TestHistoryManager:
         call_mock.assert_called_once_with(
             "GET",
             "history/single/list",
-            {"type": "json"},
         )
         assert response == fake_response
 
@@ -77,6 +76,5 @@ class TestHistoryManager:
         call_mock.assert_called_once_with(
             "GET",
             "history/single/list",
-            {"type": "json"},
         )
         assert response == fake_response

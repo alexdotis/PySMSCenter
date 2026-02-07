@@ -17,7 +17,8 @@ from .exceptions import CredentialError
 
 
 class SMSClient:
-    BASE_URL = "https://smscenter.gr/api/"
+    BASE_URL: str = "https://smscenter.gr/api/"
+    DEFAULT_TYPE: str = "json"
 
     mobile: "MobileManager"
     sms: "SmsManager"
@@ -84,13 +85,19 @@ class SMSClient:
         for manager in self.managers:
             setattr(self, manager.name, manager(self))
 
-    def fetch_data(self, method: str, endpoint: str, params: dict[str, typing.Any]) -> dict[str, typing.Any]:
-        if params.get("api_key") is None:
-            params.update({"key": self.api_key})
+    def fetch_data(
+        self,
+        method: str,
+        endpoint: str,
+        params: typing.Mapping[str, typing.Any] | None = None,
+    ) -> dict[str, typing.Any]:
+        params_dict = dict(params) if params is not None else {}
+        params_dict.setdefault("type", self.DEFAULT_TYPE)
+        params_dict.update({"key": self.api_key})
 
         url = urljoin(self.BASE_URL, endpoint)
 
-        response = self.session.request(method, url, params=params)
+        response = self.session.request(method, url, params=params_dict)
         response.raise_for_status()
         response_json = response.json()
 

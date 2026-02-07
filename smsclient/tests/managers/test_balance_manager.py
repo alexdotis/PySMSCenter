@@ -23,7 +23,6 @@ class TestBalanceManager:
         call_mock.assert_called_once_with(
             "GET",
             "me/balance",
-            {"type": "json"},
         )
         assert response == fake_response
 

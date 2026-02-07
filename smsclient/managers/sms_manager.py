@@ -68,7 +68,6 @@ class SmsManager(Manager):
             "flash": bool2str(flash) if flash is not None else None,
             "timestamp": ts2epoch(timestamp) if timestamp is not None else None,
             "callback": callback,
-            "type": "json",
         }
         params = {key: value for key, value in params.items() if value is not None}
 
@@ -114,7 +113,6 @@ class SmsManager(Manager):
             "ucs": bool2str(ucs) if ucs is not None else None,
             "flash": bool2str(flash) if flash is not None else None,
             "timestamp": ts2epoch(timestamp) if timestamp is not None else None,
-            "type": "json",
         }
         params = {key: value for key, value in params.items() if value is not None}
 
@@ -139,7 +137,7 @@ class SmsManager(Manager):
         Returns:
             SMSCancelRawData: Response from the API.
         """
-        params = {"smsId": sms_id, "type": "json"}
+        params = {"smsId": sms_id}
         response = self.call("GET", "sms/cancel", params)
         raise_for_errors(response, SMSExceptionError)
         return typing.cast(SMSCancelRawData, response)

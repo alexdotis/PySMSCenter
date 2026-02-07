@@ -40,6 +40,6 @@ class HistoryManager(Manager):
         Returns:
             SingleListHistoryRawData: Response from the API.
         """
-        response = self.call("GET", "history/single/list", {"type": "json"})
+        response = self.call("GET", "history/single/list")
 
         return typing.cast(SingleListHistoryRawData, response)

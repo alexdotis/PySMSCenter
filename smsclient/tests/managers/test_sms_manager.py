@@ -39,7 +39,6 @@ class TestSMSManager:
                 "to": "6912345678",
                 "text": "Test message",
                 "from": "SMSCenter",
-                "type": "json",
             },
         )
 
@@ -55,7 +54,7 @@ class TestSMSManager:
             ("106", "Error: Message couldnt be sent"),
         ],
     )
-    def test_send_sms_raises_on_error_codes(
+    def test_send_sms_raises_when_api_returns_error(
         self,
         client: SMSClient,
         error_code: str,
@@ -121,7 +120,6 @@ class TestSMSManager:
                 "to": "6912345678,6912345679",
                 "text": "Bulk test",
                 "from": "SMSCenter",
-                "type": "json",
             },
         )
 
@@ -248,7 +246,6 @@ class TestSMSManager:
             "sms/cancel",
             {
                 "smsId": "123",
-                "type": "json",
             },
         )
         assert response == fake_response
