@@ -7,6 +7,7 @@ from requests.adapters import HTTPAdapter
 
 from smsclient.managers.balance_manager import BalanceManager
 from smsclient.managers.contact_manager import ContactManager
+from smsclient.managers.group_manager import GroupManager
 from smsclient.managers.history_manager import HistoryManager
 from smsclient.managers.manager import Manager
 from smsclient.managers.mobile_manager import MobileManager
@@ -26,6 +27,7 @@ class SMSClient:
     history: "HistoryManager"
     status: "StatusManager"
     contact: "ContactManager"
+    group: "GroupManager"
 
     managers: typing.ClassVar[list[type[Manager]]] = [
         MobileManager,
@@ -34,6 +36,7 @@ class SMSClient:
         HistoryManager,
         StatusManager,
         ContactManager,
+        GroupManager,
     ]
 
     def __init__(self, api_key: str, max_retries: int = 0) -> None:

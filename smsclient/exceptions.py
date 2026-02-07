@@ -29,3 +29,7 @@ class ContactExceptionError(SMSClientError):
 
 class MobileExceptionError(SMSClientError):
     pass
+
+
+class GroupExceptionError(SMSClientError):
+    pass
