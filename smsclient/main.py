@@ -18,10 +18,13 @@ from smsclient.managers.status_manager import StatusManager
 
 from .exceptions import CredentialError
 
+type Timeout = tuple[float, float]
+
 
 class SMSClient:
     BASE_URL: str = "https://smscenter.gr/api/"
     DEFAULT_TYPE: str = "json"
+    DEFAULT_TIMEOUT: ClassVar[Timeout] = (5.0, 30.0)
 
     mobile: "MobileManager"
     sms: "SmsManager"
@@ -43,11 +46,12 @@ class SMSClient:
         PurchaseManager,
     ]
 
-    def __init__(self, api_key: str, max_retries: int = 0) -> None:
+    def __init__(self, api_key: str, max_retries: int = 0, timeout: Timeout | None = DEFAULT_TIMEOUT) -> None:
         self.api_key = api_key
         if not api_key:
             raise CredentialError("API key is required")
         self.max_retries = max_retries
+        self.timeout = timeout
         self._session: Session | None = None
         self._closed: bool = False
 
@@ -104,7 +108,7 @@ class SMSClient:
 
         url = urljoin(self.BASE_URL, endpoint)
 
-        response = self.session.request(method, url, params=params_dict)
+        response = self.session.request(method, url, params=params_dict, timeout=self.timeout)
         response.raise_for_status()
         response_json = response.json()
 
