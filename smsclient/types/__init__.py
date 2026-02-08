@@ -29,6 +29,7 @@ from smsclient.types.history_types import (
     SmS,
 )
 from smsclient.types.mobile_types import MobileData, MobileRawData
+from smsclient.types.purchase_types import PurchaseItem, PurchaseRawResponse
 from smsclient.types.sms_types import SMSBulkRawData, SMSCancelRawData, SMSRawData, Timestamp
 from smsclient.types.status_types import StatusRawResponse
 
@@ -57,6 +58,8 @@ __all__ = [
     "HistoryGroupSms",
     "MobileData",
     "MobileRawData",
+    "PurchaseItem",
+    "PurchaseRawResponse",
     "SMSBulkRawData",
     "SMSCancelRawData",
     "SMSRawData",
