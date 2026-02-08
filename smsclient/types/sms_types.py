@@ -1,9 +1,9 @@
 import datetime
-from typing import TypeAlias, TypedDict
+from typing import TypedDict
 
 from smsclient.types.base import BaseResponse
 
-Timestamp: TypeAlias = int | datetime.datetime
+type Timestamp = int | datetime.datetime
 
 
 class SMSRawData(BaseResponse):

@@ -1,9 +1,9 @@
 from datetime import date
-from typing import TypeAlias, TypedDict
+from typing import TypedDict
 
 from smsclient.types.base import BaseResponse
 
-DateLike: TypeAlias = str | date
+type DateLike = str | date
 
 
 class ContactID(TypedDict):

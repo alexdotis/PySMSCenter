@@ -1,4 +1,4 @@
-from typing import TypeAlias, TypedDict
+from typing import TypedDict
 
 
 class StatusItem(TypedDict, total=False):
@@ -9,4 +9,4 @@ class StatusItem(TypedDict, total=False):
     ttd: str
 
 
-StatusRawResponse: TypeAlias = dict[str, StatusItem | str]
+type StatusRawResponse = dict[str, StatusItem | str]

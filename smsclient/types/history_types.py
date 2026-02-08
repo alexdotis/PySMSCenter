@@ -1,4 +1,4 @@
-from typing import TypeAlias, TypedDict
+from typing import TypedDict
 
 from smsclient.types.base import BaseResponse
 
@@ -43,4 +43,4 @@ class HistoryGroupItem(TypedDict, total=False):
     sms: list[HistoryGroupSms]
 
 
-GroupListHistoryRawResponse: TypeAlias = dict[str, HistoryGroupItem | str]
+type GroupListHistoryRawResponse = dict[str, HistoryGroupItem | str]
