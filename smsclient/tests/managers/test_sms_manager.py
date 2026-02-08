@@ -222,6 +222,9 @@ class TestSMSManager:
 
         assert response["status"] == "1"
         assert response["error"] == "0"
+        assert "accepted" in response
+        assert "rejected" in response
+        assert "sms" in response
         assert int(response["accepted"]) + int(response["rejected"]) == 2
         assert len(response["sms"]) == expected_sms_len
 
