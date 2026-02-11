@@ -28,6 +28,7 @@ from smsclient.types.history_types import (
     SingleListHistoryRawData,
     SmS,
 )
+from smsclient.types.hlr_types import HLRLookupRawResponse
 from smsclient.types.mobile_types import MobileData, MobileRawData
 from smsclient.types.purchase_types import PurchaseItem, PurchaseRawResponse
 from smsclient.types.sms_types import SMSBulkRawData, SMSCancelRawData, SMSRawData, Timestamp
@@ -54,6 +55,7 @@ __all__ = [
     "GroupList",
     "GroupListData",
     "GroupListHistoryRawResponse",
+    "HLRLookupRawResponse",
     "HistoryGroupItem",
     "HistoryGroupSms",
     "MobileData",

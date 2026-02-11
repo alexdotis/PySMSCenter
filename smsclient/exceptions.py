@@ -33,3 +33,7 @@ class MobileExceptionError(SMSClientError):
 
 class GroupExceptionError(SMSClientError):
     pass
+
+
+class HLRExceptionError(SMSClientError):
+    pass

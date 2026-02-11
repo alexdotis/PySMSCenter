@@ -10,6 +10,7 @@ from smsclient.managers.balance_manager import BalanceManager
 from smsclient.managers.contact_manager import ContactManager
 from smsclient.managers.group_manager import GroupManager
 from smsclient.managers.history_manager import HistoryManager
+from smsclient.managers.hlr_manager import HLRManager
 from smsclient.managers.manager import Manager
 from smsclient.managers.mobile_manager import MobileManager
 from smsclient.managers.purchase_manager import PurchaseManager
@@ -34,6 +35,7 @@ class SMSClient:
     contact: "ContactManager"
     group: "GroupManager"
     purchase: "PurchaseManager"
+    hlr: "HLRManager"
 
     managers: ClassVar[list[type[Manager]]] = [
         MobileManager,
@@ -44,6 +46,7 @@ class SMSClient:
         ContactManager,
         GroupManager,
         PurchaseManager,
+        HLRManager,
     ]
 
     def __init__(self, api_key: str, max_retries: int = 0, timeout: Timeout | None = DEFAULT_TIMEOUT) -> None:
