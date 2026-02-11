@@ -37,3 +37,7 @@ class GroupExceptionError(SMSClientError):
 
 class HLRExceptionError(SMSClientError):
     pass
+
+
+class TwoFactorExceptionError(SMSClientError):
+    pass
