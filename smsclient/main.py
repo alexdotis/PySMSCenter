@@ -17,12 +17,8 @@ from smsclient.managers.mobile_manager import MobileManager
 from smsclient.managers.purchase_manager import PurchaseManager
 from smsclient.managers.sms_manager import SmsManager
 from smsclient.managers.status_manager import StatusManager
-<<<<<<< HEAD
-from smsclient.managers.two_factor_manager import TwoFaManager
-=======
 from smsclient.managers.two_factor_manager import TwoFactorManager
 from smsclient.managers.user_manager import UserManager
->>>>>>> 4619891 (User manager thing)
 
 from .exceptions import CredentialError
 
@@ -43,7 +39,7 @@ class SMSClient:
     group: "GroupManager"
     purchase: "PurchaseManager"
     hlr: "HLRManager"
-    two_factor: "TwoFaManager"
+    two_factor: "TwoFactorManager"
     key: "KeyManager"
     user: "UserManager"
 
@@ -57,7 +53,7 @@ class SMSClient:
         GroupManager,
         PurchaseManager,
         HLRManager,
-        TwoFaManager,
+        TwoFactorManager,
         KeyManager,
         UserManager,
     ]

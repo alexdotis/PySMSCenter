@@ -10,6 +10,9 @@ from .manager import Manager
 class TwoFactorManager(Manager):
     name = "two_factor"
 
+    def __str__(self) -> str:
+        return self.__class__.__name__
+
     def send(
         self,
         to: str,
