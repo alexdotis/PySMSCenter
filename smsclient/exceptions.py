@@ -45,3 +45,7 @@ class TwoFactorExceptionError(SMSClientError):
 
 class UserExceptionError(SMSClientError):
     pass
+
+
+class UserCommentExceptionError(SMSClientError):
+    pass
