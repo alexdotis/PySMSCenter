@@ -3,7 +3,6 @@ from .contact_manager import ContactManager
 from .group_manager import GroupManager
 from .history_manager import HistoryManager
 from .hlr_manager import HLRManager
-from .key_manager import KeyManager
 from .mobile_manager import MobileManager
 from .purchase_manager import PurchaseManager
 from .sms_manager import SmsManager
@@ -16,7 +15,6 @@ __all__ = [
     "GroupManager",
     "HLRManager",
     "HistoryManager",
-    "KeyManager",
     "MobileManager",
     "PurchaseManager",
     "SmsManager",
