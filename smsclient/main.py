@@ -17,7 +17,12 @@ from smsclient.managers.mobile_manager import MobileManager
 from smsclient.managers.purchase_manager import PurchaseManager
 from smsclient.managers.sms_manager import SmsManager
 from smsclient.managers.status_manager import StatusManager
+<<<<<<< HEAD
 from smsclient.managers.two_factor_manager import TwoFaManager
+=======
+from smsclient.managers.two_factor_manager import TwoFactorManager
+from smsclient.managers.user_manager import UserManager
+>>>>>>> 4619891 (User manager thing)
 
 from .exceptions import CredentialError
 
@@ -40,6 +45,7 @@ class SMSClient:
     hlr: "HLRManager"
     two_factor: "TwoFaManager"
     key: "KeyManager"
+    user: "UserManager"
 
     managers: ClassVar[list[type[Manager]]] = [
         MobileManager,
@@ -53,6 +59,7 @@ class SMSClient:
         HLRManager,
         TwoFaManager,
         KeyManager,
+        UserManager,
     ]
 
     def __init__(self, api_key: str, max_retries: int = 0, timeout: Timeout | None = DEFAULT_TIMEOUT) -> None:

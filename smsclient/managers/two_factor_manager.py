@@ -7,7 +7,7 @@ from smsclient.utils import bool2str, raise_for_errors
 from .manager import Manager
 
 
-class TwoFaManager(Manager):
+class TwoFactorManager(Manager):
     name = "two_factor"
 
     def send(

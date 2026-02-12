@@ -8,7 +8,7 @@ from .mobile_manager import MobileManager
 from .purchase_manager import PurchaseManager
 from .sms_manager import SmsManager
 from .status_manager import StatusManager
-from .two_factor_manager import TwoFaManager
+from .two_factor_manager import TwoFactorManager
 
 __all__ = [
     "BalanceManager",
@@ -21,5 +21,5 @@ __all__ = [
     "PurchaseManager",
     "SmsManager",
     "StatusManager",
-    "TwoFaManager",
+    "TwoFactorManager",
 ]

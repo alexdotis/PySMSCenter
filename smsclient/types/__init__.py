@@ -35,6 +35,7 @@ from smsclient.types.purchase_types import PurchaseItem, PurchaseRawResponse
 from smsclient.types.sms_types import SMSBulkRawData, SMSCancelRawData, SMSRawData, Timestamp
 from smsclient.types.status_types import StatusRawResponse
 from smsclient.types.two_factor_types import TwoFactorCheckResponse, TwoFactorRawResponse
+from smsclient.types.user_types import UserRawResponse
 
 __all__ = [
     "BalanceRawData",
@@ -74,4 +75,5 @@ __all__ = [
     "Timestamp",
     "TwoFactorCheckResponse",
     "TwoFactorRawResponse",
+    "UserRawResponse",
 ]

@@ -41,3 +41,7 @@ class HLRExceptionError(SMSClientError):
 
 class TwoFactorExceptionError(SMSClientError):
     pass
+
+
+class UserExceptionError(SMSClientError):
+    pass
