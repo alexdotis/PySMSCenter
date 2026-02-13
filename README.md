@@ -294,7 +294,7 @@ try:
     client.sms.send(...)
 except SMSExceptionError as exc:
     print("Error code:", exc.code)
-    print("Message:", exc)
+    print("Message:", exc.message)
 ```
 
 Credential issues raise:
