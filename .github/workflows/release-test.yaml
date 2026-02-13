@@ -9,6 +9,9 @@ jobs:
   build-and-publish:
     name: Build & Publish to TestPyPI
     runs-on: ubuntu-latest
+    environment: test
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout
