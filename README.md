@@ -1,18 +1,19 @@
 # PySMSCenter
 
-Python SMS SDK for SMSCenter API integration.
+A typed Python SDK for integrating with the SMSCenter REST API.
 
+[![PyPI](https://img.shields.io/pypi/v/pysmscenter)](https://pypi.org/project/pysmscenter/)
 ![Python](https://img.shields.io/badge/python-3.12%2B-blue)
-![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
+[![CI](https://github.com/alexdotis/PySMSCenter/actions/workflows/ci.yaml/badge.svg)](https://github.com/alexdotis/PySMSCenter/actions)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-production--ready-success)
 
 > **Unofficial** Python SDK for smscenter.gr - not affiliated with or endorsed by SMSCenter.
 
-PySMSCenter is a modern, typed Python SDK for integrating with the SMSCenter REST API.  
-It allows developers to send SMS messages, manage contacts and groups, perform HLR lookups, handle bulk SMS campaigns and implement two-factor authentication (2FA) workflows in Python applications.
+PySMSCenter is a modern, fully-typed Python SDK for integrating with the SMSCenter REST API.
+It provides a structured and well-tested interface for sending SMS messages, managing contacts and groups, performing HLR lookups, handling bulk campaigns, and implementing two-factor authentication (2FA) workflows.
 
-`pysmscenter` provides a structured, well-tested interface for sending and managing SMS messages via [smscenter](https://smscenter.gr/api/docs/en?ModPagespeed=off#how-to-start)
+📘 Official API Documentation: https://smscenter.gr/api/docs/en
 
 ## ✨ Features
 
@@ -37,21 +38,38 @@ It allows developers to send SMS messages, manage contacts and groups, perform H
 
 - **Viber Management**
 
-## 📦 Installation
+## 🔧 Requirements
 
-Once published to PyPI:
+- Python 3.12+
+
+## 📦 Installation
 
 ```bash
 pip install pysmscenter
 ```
 
-Until then:
+### Development installation
 
 ```bash
-git clone https://github.com/yourusername/PySMSCenter.git
+git clone https://github.com/alexdotis/PySMSCenter.git
 cd PySMSCenter
-pip install .
+pip install -e ".[dev]"
 ```
+
+## ⚡ Quick Example
+
+```python
+from pysmscenter import SMSClient
+
+with SMSClient("your_api_key") as client:
+    client.sms.send(
+        to="306912345678",
+        text="Hello from PySMSCenter!",
+        sender="MyApp"
+    )
+```
+
+---
 
 ## 🔐 Authentication
 
@@ -93,7 +111,7 @@ with SMSClient("your_api_key") as client:
 
 ## 📱 SMS
 
-## Send Single SMS
+### Send Single SMS
 
 ```python
 client.sms.send(
@@ -103,7 +121,7 @@ client.sms.send(
 )
 ```
 
-## Send Bulk SMS
+### Send Bulk SMS
 
 ```python
 numbers = ["306912345678", "306912345679"]
@@ -115,7 +133,7 @@ client.sms.bulk(
 )
 ```
 
-## Cancel Scheduled SMS
+### Cancel Scheduled SMS
 
 ```python
 client.sms.cancel("sms_id_here")
@@ -123,19 +141,19 @@ client.sms.cancel("sms_id_here")
 
 ## 📊 Account & Status
 
-## Check Balance
+### Check Balance
 
 ```python
 client.balance.check()
 ```
 
-## Check Delivery Status
+### Check Delivery Status
 
 ```python
 client.status.sms("sms_id_here")
 ```
 
-## Get Recent Status Reports
+### Get Recent Status Reports
 
 ```python
 client.status.get()
@@ -145,13 +163,13 @@ client.status.get()
 
 ## 📖 History
 
-## Single SMS History
+### Single SMS History
 
 ```python
 client.history.single_list()
 ```
 
-## Grouped SMS History
+### Grouped SMS History
 
 ```python
 client.history.group_list()
@@ -161,13 +179,13 @@ client.history.group_list()
 
 ## 👤 Contacts
 
-## List Contacts
+### List Contacts
 
 ```python
 client.contact.list()
 ```
 
-## Add Contact
+### Add Contact
 
 ```python
 client.contact.add(
@@ -177,7 +195,7 @@ client.contact.add(
 )
 ```
 
-## Update Contact
+### Update Contact
 
 ```python
 client.contact.update(
@@ -186,7 +204,7 @@ client.contact.update(
 )
 ```
 
-## Delete Contact
+### Delete Contact
 
 ```python
 client.contact.delete("12345")
@@ -196,13 +214,13 @@ client.contact.delete("12345")
 
 ## 👥 Groups
 
-## Create Group
+### Create Group
 
 ```python
 client.group.add("Customers")
 ```
 
-## Add Contact to Group
+### Add Contact to Group
 
 ```python
 client.group.add_contact(
@@ -211,7 +229,7 @@ client.group.add_contact(
 )
 ```
 
-## Remove Contact from Group
+### Remove Contact from Group
 
 ```python
 client.group.delete_contact(
@@ -224,13 +242,13 @@ client.group.delete_contact(
 
 ## 🔎 Mobile & HLR
 
-## Validate Mobile Number
+### Validate Mobile Number
 
 ```python
 client.mobile.check("306912345678")
 ```
 
-## HLR Lookup
+### HLR Lookup
 
 ```python
 client.hlr.lookup("306912345678")
@@ -240,7 +258,7 @@ client.hlr.lookup("306912345678")
 
 ## 🔐 Two Factor Authentication
 
-## Send 2FA Code
+### Send 2FA Code
 
 ```python
 response = client.two_factor.send(
@@ -249,7 +267,7 @@ response = client.two_factor.send(
 )
 ```
 
-## Verify 2FA Code
+### Verify 2FA Code
 
 ```python
 client.two_factor.check(
@@ -262,7 +280,7 @@ client.two_factor.check(
 
 ## 👥 Sub-Accounts
 
-## Create Sub-Account
+### Create Sub-Account
 
 ```python
 client.user.add(
@@ -271,7 +289,7 @@ client.user.add(
 )
 ```
 
-## Top-up Sub-Account
+### Top-up Sub-Account
 
 ```python
 client.user.topup(
