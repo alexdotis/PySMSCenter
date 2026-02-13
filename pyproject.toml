@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pysmscenter"
-version = "0.1.0"
+version = "0.1.1"
 description = "Unofficial Python SDK for smscenter.gr REST API"
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.12"
@@ -189,8 +189,9 @@ reportUnnecessaryContains = "error"
 reportUnnecessaryTypeIgnoreComment = "error"
 reportImplicitOverride = "none"
 
-[tool.setuptools]
-packages = ["pysmscenter"]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pysmscenter*"]
 
 [tool.setuptools.package-data]
 pysmscenter = ["py.typed"]
