@@ -1,106 +1,329 @@
-PySMSCenter is a developing Python library designed to facilitate the sending and managing of SMS messages via the `smscenter.gr` API. Currently, it supports basic functionalities such as sending SMS, checking account balances, and validating mobile numbers, with plans to extend features.
+# PySMSCenter
 
-## Features
+Python SMS SDK for SMSCenter API integration.
 
-- **Mobile Number Validation**: Check the validity of mobile numbers.
-- **SMS Sending**: Easily send SMS messages to one or multiple recipients.
-- **Balance Management**: Check and manage your SMS account balance. -
-- **SMS History**: Retrieve and view your SMS sending history.
-- **Status Checks**: Monitor the delivery status of your messages.
-- **Contact Management**: Manage your contact list for easier SMS operations.
+![Python](https://img.shields.io/badge/python-3.12%2B-blue)
+![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-production--ready-success)
 
-## Planed Features
+> **Unofficial** Python SDK for smscenter.gr - not affiliated with or endorsed by SMSCenter.
+
+PySMSCenter is a modern, typed Python SDK for integrating with the SMSCenter REST API.  
+It allows developers to send SMS messages, manage contacts and groups, perform HLR lookups, handle bulk SMS campaigns and implement two-factor authentication (2FA) workflows in Python applications.
+
+`pysmscenter` provides a structured, well-tested interface for sending and managing SMS messages via [smscenter](https://smscenter.gr/api/docs/en?ModPagespeed=off#how-to-start)
+
+## ✨ Features
+
+- 📱 Send Single SMS
+- 📤 Send Bulk SMS
+- 📊 Check Account Balance
+- 📖 SMS History (Single & Grouped)
+- 📬 Delivery Status Tracking
+- 👤 Contact Management
+- 👥 Group Management
+- 🔐 Two-Factor Authentication (2FA)
+- 🔎 HLR Lookup
+- 👥 Sub-account Management
+- 🔁 Automatic Retry Support
+- ⚠️ Domain-Specific Exceptions
+- 🧪 Fully Tested
+- 🐍 Python 3.12+
+
+---
+
+## Planned Features
 
 - **Viber Management**
-- **Group Management**
 
-## Getting Started
+## 📦 Installation
 
-### Prerequisites
+Once published to PyPI:
 
-- Python **>3.11**
-- An API key from [smscenter](https://smscenter.gr/api/docs/en?ModPagespeed=off#how-to-start)
+```bash
+pip install pysmscenter
+```
 
-### Installation
+Until then:
 
-Currently, the library is available directly from the source. Clone or download the repository from GitHub, then install requirements using pip.
+```bash
+git clone https://github.com/yourusername/PySMSCenter.git
+cd PySMSCenter
+pip install .
+```
 
-### Client
+## 🔐 Authentication
 
-Client (with context manager support)
+You need an API key from:
+
+https://smscenter.gr/api/docs/en
+
+### Using API Key
 
 ```python
 from smsclient import SMSClient
 
-with SMSClient("api_key") as client:
-	client.mobile.check("phone number")
+client = SMSClient("your_api_key")
 ```
 
-The client can also be used without a context manager if preferred.
-
-### Send Single SMS
+### Using Username & Password
 
 ```python
 from smsclient import SMSClient
 
-client = SMSClient("api_key")
-
-send_single_sms = client.sms.send(to="1234567890", text="Hello World", sender="Test")
+client = SMSClient.from_credentials("username", "password")
 ```
 
-### Send Batch
+---
+
+## 🚀 Basic Usage
+
+### Context Manager (Recommended)
 
 ```python
-mobile_numbers = ["1234567890","2234567890","3234567890"]
-client.sms.bulk(to=mobile_numbers, text="Hello World", sender="Test")
+from smsclient import SMSClient
+
+with SMSClient("your_api_key") as client:
+    balance = client.balance.check()
+    print(balance.get("balance"))
 ```
 
-### SMS Balance
+---
+
+## 📱 SMS
+
+## Send Single SMS
+
+```python
+client.sms.send(
+    to="306912345678",
+    text="Hello World",
+    sender="MyApp"
+)
+```
+
+## Send Bulk SMS
+
+```python
+numbers = ["306912345678", "306912345679"]
+
+client.sms.bulk(
+    to=numbers,
+    text="Bulk message",
+    sender="MyApp"
+)
+```
+
+## Cancel Scheduled SMS
+
+```python
+client.sms.cancel("sms_id_here")
+```
+
+## 📊 Account & Status
+
+## Check Balance
 
 ```python
 client.balance.check()
 ```
 
-### SMS History
+## Check Delivery Status
+
+```python
+client.status.sms("sms_id_here")
+```
+
+## Get Recent Status Reports
+
+```python
+client.status.get()
+```
+
+---
+
+## 📖 History
+
+## Single SMS History
 
 ```python
 client.history.single_list()
 ```
 
-### Check Mobile
+## Grouped SMS History
 
 ```python
-client.mobile.check(mobile="1234567890")
+client.history.group_list()
 ```
 
-### SMS Status
+---
+
+## 👤 Contacts
+
+## List Contacts
 
 ```python
-client.status.sms(sms_id="123456")
+client.contact.list()
 ```
 
-### Contacts
+## Add Contact
 
 ```python
-contact_list = client.contact.list()
-
-# add contact
 client.contact.add(
-	mobile="1234567890",
-	name="John",
-	surname="Doe"
+    mobile="306912345678",
+    name="John",
+    surname="Doe",
 )
-
-# Get contact
-client.contact.get(contact_id="123456")
-
-# Delete a contact
-client.contact.delete(contact_id="123456")
-
 ```
 
-### You can find the api documentation from [smscenter.gr](https://smscenter.gr/api/docs/en?ModPagespeed=off)
+## Update Contact
 
-## Contributing
+```python
+client.contact.update(
+    contact_id="12345",
+    name="Updated Name"
+)
+```
 
-We welcome contributions to help grow and improve this library. Please refer to our contributing guidelines for more information on how to submit issues, fixes, or enhancements.
+## Delete Contact
+
+```python
+client.contact.delete("12345")
+```
+
+---
+
+## 👥 Groups
+
+## Create Group
+
+```python
+client.group.add("Customers")
+```
+
+## Add Contact to Group
+
+```python
+client.group.add_contact(
+    group_id="123",
+    contact_id="456"
+)
+```
+
+## Remove Contact from Group
+
+```python
+client.group.delete_contact(
+    group_id="123",
+    contact_id="456"
+)
+```
+
+---
+
+## 🔎 Mobile & HLR
+
+## Validate Mobile Number
+
+```python
+client.mobile.check("306912345678")
+```
+
+## HLR Lookup
+
+```python
+client.hlr.lookup("306912345678")
+```
+
+---
+
+## 🔐 Two Factor Authentication
+
+## Send 2FA Code
+
+```python
+response = client.two_factor.send(
+    to="306912345678",
+    text="Your verification code is %%code%%"
+)
+```
+
+## Verify 2FA Code
+
+```python
+client.two_factor.check(
+    auth_id="auth_id_from_send",
+    code="1234"
+)
+```
+
+---
+
+## 👥 Sub-Accounts
+
+## Create Sub-Account
+
+```python
+client.user.add(
+    email="subaccount@example.com",
+    password="securepassword"
+)
+```
+
+## Top-up Sub-Account
+
+```python
+client.user.topup(
+    user_id="12345",
+    sms="10",
+    cost="5"
+)
+```
+
+---
+
+## ⚠️ Error Handling
+
+All API errors raise domain-specific exceptions:
+
+```python
+from smsclient.exceptions import SMSExceptionError
+
+try:
+    client.sms.send(...)
+except SMSExceptionError as exc:
+    print("Error code:", exc.code)
+    print("Message:", exc)
+```
+
+Credential issues raise:
+
+```python
+from smsclient.exceptions import CredentialError
+```
+
+---
+
+## 🧪 Testing
+
+Run the test suite:
+
+```bash
+pytest
+```
+
+## 📄 License
+
+MIT License
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome.  
+Please open an issue or submit a pull request.
+
+## Keywords
+
+Python SMS SDK, SMS API client, Bulk SMS Python, SMS Gateway integration, SMSCenter API wrapper, SMS REST client, Two Factor Authentication API, HLR Lookup API, Python messaging library
