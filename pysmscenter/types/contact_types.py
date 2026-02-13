@@ -1,7 +1,7 @@
 from datetime import date
 from typing import TypedDict
 
-from smsclient.types.base import BaseResponse
+from pysmscenter.types.base import BaseResponse
 
 type DateLike = str | date
 

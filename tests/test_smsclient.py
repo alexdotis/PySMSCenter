@@ -4,15 +4,15 @@ from urllib.parse import urljoin
 import pytest
 from urllib3.util.retry import Retry
 
-from smsclient import SMSClient
-from smsclient.exceptions import CredentialError
-from smsclient.main import BaseHTTPClient, SMSAuthClient
+from pysmscenter import SMSClient
+from pysmscenter.exceptions import CredentialError
+from pysmscenter.main import BaseHTTPClient, SMSAuthClient
 
 
 @pytest.fixture
 def auth_client_fixture(mocker: Any) -> tuple[Any, Any]:
     auth_client = mocker.Mock()
-    auth_ctor = mocker.patch("smsclient.main.SMSAuthClient", return_value=auth_client)
+    auth_ctor = mocker.patch("pysmscenter.main.SMSAuthClient", return_value=auth_client)
     return auth_client, auth_ctor
 
 
@@ -26,9 +26,9 @@ class TestSMSClient:
 
     def test_session_creates_and_reuses_session(self, mocker: Any) -> None:
         mock_session = mocker.Mock()
-        session_ctor = mocker.patch("smsclient.main.Session", return_value=mock_session)
+        session_ctor = mocker.patch("pysmscenter.main.Session", return_value=mock_session)
         adapter = mocker.Mock()
-        adapter_ctor = mocker.patch("smsclient.main.HTTPAdapter", return_value=adapter)
+        adapter_ctor = mocker.patch("pysmscenter.main.HTTPAdapter", return_value=adapter)
 
         client = SMSClient("test-api-key", max_retries=2)
 

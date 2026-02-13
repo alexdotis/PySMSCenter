@@ -1,8 +1,8 @@
 from typing import cast
 
-from smsclient.exceptions import TwoFactorExceptionError
-from smsclient.types import TwoFactorCheckResponse, TwoFactorRawResponse
-from smsclient.utils import bool2str, raise_for_errors
+from pysmscenter.exceptions import TwoFactorExceptionError
+from pysmscenter.types import TwoFactorCheckResponse, TwoFactorRawResponse
+from pysmscenter.utils import bool2str, raise_for_errors
 
 from .manager import Manager
 

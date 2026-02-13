@@ -1,9 +1,9 @@
 from collections.abc import Sequence
 from typing import cast
 
-from smsclient.exceptions import SMSExceptionError
-from smsclient.types import SMSBulkRawData, SMSCancelRawData, SMSRawData, Timestamp
-from smsclient.utils import bool2str, raise_for_errors, ts2epoch
+from pysmscenter.exceptions import SMSExceptionError
+from pysmscenter.types import SMSBulkRawData, SMSCancelRawData, SMSRawData, Timestamp
+from pysmscenter.utils import bool2str, raise_for_errors, ts2epoch
 
 from .manager import Manager
 

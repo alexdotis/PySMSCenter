@@ -62,7 +62,7 @@ https://smscenter.gr/api/docs/en
 ### Using API Key
 
 ```python
-from smsclient import SMSClient
+from pysmscenter import SMSClient
 
 client = SMSClient("your_api_key")
 ```
@@ -70,7 +70,7 @@ client = SMSClient("your_api_key")
 ### Using Username & Password
 
 ```python
-from smsclient import SMSClient
+from pysmscenter import SMSClient
 
 client = SMSClient.from_credentials("username", "password")
 ```
@@ -82,7 +82,7 @@ client = SMSClient.from_credentials("username", "password")
 ### Context Manager (Recommended)
 
 ```python
-from smsclient import SMSClient
+from pysmscenter import SMSClient
 
 with SMSClient("your_api_key") as client:
     balance = client.balance.check()
@@ -288,7 +288,7 @@ client.user.topup(
 All API errors raise domain-specific exceptions:
 
 ```python
-from smsclient.exceptions import SMSExceptionError
+from pysmscenter.exceptions import SMSExceptionError
 
 try:
     client.sms.send(...)
@@ -300,7 +300,7 @@ except SMSExceptionError as exc:
 Credential issues raise:
 
 ```python
-from smsclient.exceptions import CredentialError
+from pysmscenter.exceptions import CredentialError
 ```
 
 ---

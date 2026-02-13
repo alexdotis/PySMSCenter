@@ -2,15 +2,15 @@ from typing import cast
 
 from email_validator import EmailNotValidError, validate_email
 
-from smsclient.exceptions import SMSClientError, UserCommentExceptionError, UserExceptionError
-from smsclient.types import (
+from pysmscenter.exceptions import SMSClientError, UserCommentExceptionError, UserExceptionError
+from pysmscenter.types import (
     BaseResponse,
     UserCommentListRawResponseType,
     UserCommentRawResponse,
     UserListRawResponseType,
     UserRawResponse,
 )
-from smsclient.utils import raise_for_errors
+from pysmscenter.utils import raise_for_errors
 
 from .manager import Manager
 

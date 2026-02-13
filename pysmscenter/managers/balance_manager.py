@@ -1,6 +1,6 @@
 from typing import cast
 
-from smsclient.types import BalanceRawData
+from pysmscenter.types import BalanceRawData
 
 from .manager import Manager
 

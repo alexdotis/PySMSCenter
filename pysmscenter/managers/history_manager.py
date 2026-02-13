@@ -1,6 +1,6 @@
 from typing import cast
 
-from smsclient.types import GroupListHistoryRawResponse, SingleListHistoryRawData
+from pysmscenter.types import GroupListHistoryRawResponse, SingleListHistoryRawData
 
 from .manager import Manager
 

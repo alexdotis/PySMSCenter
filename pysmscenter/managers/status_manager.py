@@ -1,6 +1,6 @@
 from typing import cast
 
-from smsclient.types import StatusRawResponse
+from pysmscenter.types import StatusRawResponse
 
 from .manager import Manager
 

@@ -1,8 +1,8 @@
 from typing import cast, overload
 
-from smsclient.exceptions import GroupExceptionError
-from smsclient.types import BaseResponse, GroupAddContactData, GroupData, GroupGetData, GroupListData
-from smsclient.utils import raise_for_errors
+from pysmscenter.exceptions import GroupExceptionError
+from pysmscenter.types import BaseResponse, GroupAddContactData, GroupData, GroupGetData, GroupListData
+from pysmscenter.utils import raise_for_errors
 
 from .manager import Manager
 

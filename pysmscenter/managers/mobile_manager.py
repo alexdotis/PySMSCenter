@@ -1,8 +1,8 @@
 from typing import cast
 
-from smsclient.exceptions import MobileExceptionError
-from smsclient.types import MobileRawData
-from smsclient.utils import raise_for_errors
+from pysmscenter.exceptions import MobileExceptionError
+from pysmscenter.types import MobileRawData
+from pysmscenter.utils import raise_for_errors
 
 from .manager import Manager
 

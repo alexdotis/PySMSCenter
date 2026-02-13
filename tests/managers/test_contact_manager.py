@@ -4,8 +4,8 @@ from typing import Any
 
 import pytest
 
-from smsclient import SMSClient
-from smsclient.exceptions import ContactExceptionError
+from pysmscenter import SMSClient
+from pysmscenter.exceptions import ContactExceptionError
 
 
 class TestContactManager:

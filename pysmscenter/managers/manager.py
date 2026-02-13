@@ -2,7 +2,7 @@ from collections.abc import Mapping
 from typing import Any, ClassVar, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from smsclient.main import SMSClient
+    from pysmscenter.main import SMSClient
 
 
 class Manager:
