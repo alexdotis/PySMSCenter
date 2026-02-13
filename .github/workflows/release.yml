@@ -1,14 +1,16 @@
-name: Release to TestPyPI
+name: Release to PyPI
 
 on:
   push:
     tags:
-      - "v*-rc*"
+      - "v*.*.*"
 
 jobs:
   build-and-publish:
-    name: Build & Publish to TestPyPI
+    name: Build & Publish to PyPI
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout
@@ -27,9 +29,8 @@ jobs:
       - name: Build package
         run: python -m build
 
-      - name: Publish to TestPyPI
-        run: |
-          twine upload --repository testpypi dist/*
+      - name: Publish to PyPI
+        run: twine upload dist/*
         env:
           TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
