@@ -7,19 +7,19 @@ from requests import Session
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-from smsclient.managers.balance_manager import BalanceManager
-from smsclient.managers.contact_manager import ContactManager
-from smsclient.managers.group_manager import GroupManager
-from smsclient.managers.history_manager import HistoryManager
-from smsclient.managers.hlr_manager import HLRManager
-from smsclient.managers.manager import Manager
-from smsclient.managers.mobile_manager import MobileManager
-from smsclient.managers.purchase_manager import PurchaseManager
-from smsclient.managers.sms_manager import SmsManager
-from smsclient.managers.status_manager import StatusManager
-from smsclient.managers.two_factor_manager import TwoFactorManager
-from smsclient.managers.user_manager import UserManager
-from smsclient.types.key_types import KeyRawResponse
+from pysmscenter.managers.balance_manager import BalanceManager
+from pysmscenter.managers.contact_manager import ContactManager
+from pysmscenter.managers.group_manager import GroupManager
+from pysmscenter.managers.history_manager import HistoryManager
+from pysmscenter.managers.hlr_manager import HLRManager
+from pysmscenter.managers.manager import Manager
+from pysmscenter.managers.mobile_manager import MobileManager
+from pysmscenter.managers.purchase_manager import PurchaseManager
+from pysmscenter.managers.sms_manager import SmsManager
+from pysmscenter.managers.status_manager import StatusManager
+from pysmscenter.managers.two_factor_manager import TwoFactorManager
+from pysmscenter.managers.user_manager import UserManager
+from pysmscenter.types.key_types import KeyRawResponse
 
 from .exceptions import CredentialError
 

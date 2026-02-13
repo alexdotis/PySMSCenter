@@ -2,8 +2,8 @@ from typing import Any
 
 import pytest
 
-from smsclient.exceptions import HLRExceptionError
-from smsclient.main import SMSClient
+from pysmscenter import SMSClient
+from pysmscenter.exceptions import HLRExceptionError
 
 
 class TestHlrManager:

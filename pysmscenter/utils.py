@@ -2,7 +2,7 @@ import datetime
 import re
 from typing import Any
 
-from smsclient.exceptions import SMSClientError
+from pysmscenter.exceptions import SMSClientError
 
 
 def raise_for_errors(

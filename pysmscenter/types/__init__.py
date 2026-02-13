@@ -1,6 +1,6 @@
-from smsclient.types.balance_types import BalanceRawData
-from smsclient.types.base import BaseResponse
-from smsclient.types.contact_types import (
+from pysmscenter.types.balance_types import BalanceRawData
+from pysmscenter.types.base import BaseResponse
+from pysmscenter.types.contact_types import (
     Contact,
     ContactData,
     ContactDetail,
@@ -9,7 +9,7 @@ from smsclient.types.contact_types import (
     Contacts,
     DateLike,
 )
-from smsclient.types.group_types import (
+from pysmscenter.types.group_types import (
     Group,
     GroupAddContactData,
     GroupAddContactGroup,
@@ -21,21 +21,21 @@ from smsclient.types.group_types import (
     GroupList,
     GroupListData,
 )
-from smsclient.types.history_types import (
+from pysmscenter.types.history_types import (
     GroupListHistoryRawResponse,
     HistoryGroupItem,
     HistoryGroupSms,
     SingleListHistoryRawData,
     SmS,
 )
-from smsclient.types.hlr_types import HLRLookupRawResponse
-from smsclient.types.key_types import KeyRawResponse
-from smsclient.types.mobile_types import MobileData, MobileRawData
-from smsclient.types.purchase_types import PurchaseItem, PurchaseRawResponse
-from smsclient.types.sms_types import SMSBulkRawData, SMSCancelRawData, SMSRawData, Timestamp
-from smsclient.types.status_types import StatusRawResponse
-from smsclient.types.two_factor_types import TwoFactorCheckResponse, TwoFactorRawResponse
-from smsclient.types.user_types import (
+from pysmscenter.types.hlr_types import HLRLookupRawResponse
+from pysmscenter.types.key_types import KeyRawResponse
+from pysmscenter.types.mobile_types import MobileData, MobileRawData
+from pysmscenter.types.purchase_types import PurchaseItem, PurchaseRawResponse
+from pysmscenter.types.sms_types import SMSBulkRawData, SMSCancelRawData, SMSRawData, Timestamp
+from pysmscenter.types.status_types import StatusRawResponse
+from pysmscenter.types.two_factor_types import TwoFactorCheckResponse, TwoFactorRawResponse
+from pysmscenter.types.user_types import (
     UserCommentListRawResponseType,
     UserCommentRawResponse,
     UserListRawResponseType,

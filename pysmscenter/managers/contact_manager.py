@@ -1,9 +1,9 @@
 from datetime import date
 from typing import Any, cast
 
-from smsclient.exceptions import ContactExceptionError
-from smsclient.types import BaseResponse, ContactData, ContactDetail, ContactListData, DateLike
-from smsclient.utils import parse_date, raise_for_errors
+from pysmscenter.exceptions import ContactExceptionError
+from pysmscenter.types import BaseResponse, ContactData, ContactDetail, ContactListData, DateLike
+from pysmscenter.utils import parse_date, raise_for_errors
 
 from .manager import Manager
 

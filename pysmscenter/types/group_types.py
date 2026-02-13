@@ -1,6 +1,6 @@
 from typing import TypedDict
 
-from smsclient.types.base import BaseResponse
+from pysmscenter.types.base import BaseResponse
 
 
 class Group(TypedDict):

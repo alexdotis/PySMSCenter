@@ -1,6 +1,6 @@
 from typing import Any
 
-from smsclient.main import SMSClient
+from pysmscenter.main import SMSClient
 
 
 class TestHistoryManager:

@@ -1,6 +1,6 @@
 import pytest
 
-from smsclient import SMSClient
+from pysmscenter import SMSClient
 
 
 @pytest.fixture

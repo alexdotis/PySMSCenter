@@ -3,8 +3,8 @@ from typing import Any
 
 import pytest
 
-from smsclient import SMSClient
-from smsclient.exceptions import MobileExceptionError
+from pysmscenter import SMSClient
+from pysmscenter.exceptions import MobileExceptionError
 
 
 class TestMobileManager:

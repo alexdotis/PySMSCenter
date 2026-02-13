@@ -2,8 +2,8 @@ from typing import Any
 
 import pytest
 
-from smsclient import SMSClient
-from smsclient.exceptions import SMSClientError, UserCommentExceptionError, UserExceptionError
+from pysmscenter import SMSClient
+from pysmscenter.exceptions import SMSClientError, UserCommentExceptionError, UserExceptionError
 
 
 class TestUserManager:

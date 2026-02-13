@@ -2,8 +2,8 @@ import datetime
 
 import pytest
 
-from smsclient.exceptions import SMSClientError
-from smsclient.utils import bool2str, parse_date, raise_for_errors, ts2epoch
+from pysmscenter.exceptions import SMSClientError
+from pysmscenter.utils import bool2str, parse_date, raise_for_errors, ts2epoch
 
 
 def test_raise_for_errors_does_not_raise_on_success():

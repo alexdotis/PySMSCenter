@@ -1,8 +1,8 @@
 from typing import cast
 
-from smsclient.exceptions import HLRExceptionError
-from smsclient.types import HLRLookupRawResponse
-from smsclient.utils import raise_for_errors
+from pysmscenter.exceptions import HLRExceptionError
+from pysmscenter.types import HLRLookupRawResponse
+from pysmscenter.utils import raise_for_errors
 
 from .manager import Manager
 
