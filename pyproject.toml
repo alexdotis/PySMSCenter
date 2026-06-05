@@ -33,6 +33,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Typing :: Typed",
 ]
 
@@ -52,7 +53,7 @@ Issues = "https://github.com/alexdotis/PySMSCenter/issues"
 
 
 [tool.ruff]
-target-version = "py313"
+target-version = "py312"
 line-length = 119
 
 [tool.ruff.lint]
@@ -172,7 +173,7 @@ max-statements = 250
 line-ending = "lf"
 
 [tool.pyright]
-pythonVersion = "3.13"
+pythonVersion = "3.12"
 
 reportUntypedFunctionDecorator = "error"
 reportUntypedClassDecorator = "error"
